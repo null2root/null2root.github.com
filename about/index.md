@@ -14,38 +14,38 @@ image:
 * 단체 후드 제작
 * 데프콘 연합 TFT 발족
 * Codegate 2018 prequals 
-  -  null2root / 19위
+  *  null2root / 19위
 * iCTF 2018
-  - 연합
+  * 연합
 * 0CTF/TCTF 2018 Quals 
-  - 연합
+  * 연합
 * ing
 
 #### 2017
 * 내부 기술 세미나 #1 (2월)
-  - grace, unlimit 
+  * grace, unlimit 
 * Codegate 2017 prequals (2월)
-  - null2root / 28위
+  * null2root / 28위
 * 내부 스터디 개설 및 진행 (4월)
 * 게임 보안 스터디, 힙 익스플로잇 스터디 - 종료
 * DEFCON CTF prequals (5월)
-  - null2root / 33위
+  * null2root / 33위
 * TokyoWesterns CTF prequals (9월)
-  - null2root / 34위
+  * null2root / 34위
 * HITCON CTF prequals (11월)
-  - 연합 heatcorn / 32위
+  * 연합 heatcorn / 32위
 * 제 14회 해킹방어대회 (11월)
-  - null2root / 3위 한국인터넷진흥원장상 ( saintlinu, grace, unlimit, cheese )
-  - gido / 9위 ( md5, loossy, hyoub9un, EG )
+  * null2root / 3위 한국인터넷진흥원장상 ( saintlinu, grace, unlimit, cheese )
+  * gido / 9위 ( md5, loossy, hyoub9un, EG )
 * 제 5회 화이트햇 콘테스트
-  - null2root / 10위  ( saintlinu, grace, unlimit, cheese )
+  * null2root / 10위  ( saintlinu, grace, unlimit, cheese )
 * 사이버공격방어대회 2017
-  - MD5{PK3} / 레드팀 6위  ( saintlinu, md5, hyunmini, kaspy, uptx )
-  - 알쓸신잡 / 블루팀 4위  ( hyoub9un, eloi, cheese )
+  * MD5{PK3} / 레드팀 6위  ( saintlinu, md5, hyunmini, kaspy, uptx )
+  * 알쓸신잡 / 블루팀 4위  ( hyoub9un, eloi, cheese )
 * 내부 스터디용 Gitlab 신설
 * 신입 모집 및 산행
 * 내부 기술 세미나 #2 (12월) 
-  - summer, hyunmini, cheese
+  * summer, hyunmini, cheese
 
 #### 2016
 * 내부 기술 세미나 #1 (1월) : leopardan, cheese
@@ -131,8 +131,8 @@ image:
 *  그룹 전체 MT - 관악산
 *  KISA 주최 2004년 CONCERT 발표
 *  KISA 주최 제1회 해킹방어대상
-  - 정보통신부장관상(대상) : Saintlinu, Anesra, AmesianX - KR@C Team
-  - 정보보호진흥원장상(우수상) : Segovia, Mutacker, Maya71 - NULL Team
+  * 정보통신부장관상(대상) : Saintlinu, Anesra, AmesianX - KR@C Team
+  * 정보보호진흥원장상(우수상) : Segovia, Mutacker, Maya71 - NULL Team
 
 #### 2003
 * 제5회 Null@Root 정회원 선발대회 개최 
