@@ -6,8 +6,11 @@
    Typography variables
    ========================================================================== */
 
-$base-font                   	: Georgia,Times,"Times New Roman",serif;
-$heading-font                	: "Helvetica Neue","Segoe UI",Arial,sans-serif;
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+
+$base-font                   	: "Noto Sans KR", Georgia,Times,"Times New Roman",serif;
+$heading-font                	: "Noto Sans KR", "Helvetica Neue","Segoe UI",Arial,sans-serif;
 $caption-font                	: $base-font;
 $code-font                   	: monospace;
 $alt-font                    	: $heading-font;
