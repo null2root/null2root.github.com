@@ -1,6 +1,6 @@
 ---
 layout: archive
-title: "Contact Us"
+title: "Contact"
 modified:
 excerpt: ""
 tags: []

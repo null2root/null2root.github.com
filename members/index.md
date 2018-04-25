@@ -1,6 +1,6 @@
 ---
 layout: archive
-title: "members"
+title: "Members"
 modified:
 excerpt: ""
 tags: []

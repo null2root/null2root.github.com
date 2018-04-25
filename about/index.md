@@ -1,6 +1,6 @@
 ---
 layout: archive
-title: "About Null@Root"
+title: "About"
 modified:
 excerpt: ""
 tags: []
