@@ -1,6 +1,18 @@
 # Site navigation links
 
-- title:
-  url:
-  excerpt:
-  image:
+- title: About
+  url: /about/
+  excerpt: "about Null@Root"
+  image: teaser_400x250.gif
+
+- title: Members
+  url: /people/
+  excerpt: "members"
+
+- title: articles
+  url: /articles/
+  excerpt: ""
+  
+- title: Contact
+  url: /contact/
+  excerpt: "Get in touch with us"
