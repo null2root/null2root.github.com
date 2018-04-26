@@ -1,11 +1,13 @@
 ---
 layout: archive
 permalink: /
-title: "Latest Posts"
 ---
 
+<p align="center">
 ![Alt text](images/n2rlogo.png)
+</p>
 
+# Latest Posts
 
 <div class="tiles">
 {% for post in site.posts %}
