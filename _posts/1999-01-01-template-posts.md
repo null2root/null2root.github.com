@@ -1,5 +1,5 @@
 ---
-layout:        post
+layout:        article
 title:         "The title of your post"
 subtitle:      "The subtitle of your post"
 author:        member_id

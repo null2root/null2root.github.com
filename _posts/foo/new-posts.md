@@ -1,5 +1,5 @@
 ---
-layout:        post
+layout:        article
 title:         "g0g0g0 (0ctf quals) write-up"
 subtitle:      "0ctf 2018 - g0g0g0 (Reverse, 343pt)"
 author:        cheese
