@@ -4,7 +4,7 @@ permalink: /
 ---
 
 <p align="center">
-![Alt text](images/n2rlogo.png)
+	<img src="images/n2rlogo.png">
 </p>
 
 # Latest Posts
