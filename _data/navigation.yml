@@ -2,17 +2,17 @@
 
 - title: About
   url: /about/
-  excerpt: "about Null@Root"
+  excerpt: "null@root"
   image: teaser_400x250.gif
 
 - title: Members
   url: /members/
-  excerpt: "members"
+  excerpt: "멤버 소개"
 
-- title: articles
+- title: Articles
   url: /articles/
-  excerpt: ""
+  excerpt: "Write-up, 기술 문서, 공고 사항 등"
   
 - title: Contact
   url: /contact/
-  excerpt: "Get in touch with us"
+  excerpt: ""
