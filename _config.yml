@@ -1,0 +1,56 @@
+name: NULL@ROOT
+bio: Underground hacker group
+description: Yes, we do something! 🙂
+external-image: false
+picture: assets/images/NR-Origami3-300x300-black.png
+#resume: true
+#resume-external: true
+#resume-url: 'https://google.com/?q=my+resume'
+#url: 'https://koppl.in/indigo'
+#permalink: '/:title/'
+disqus:
+  shortname: mydisqus
+  categories:
+    - about
+    - members
+    - blog
+    - project
+#facebook: myfacebook
+#twitter: mytwitter
+github: null2root
+#medium: medium
+email: admin@null2root.org
+authors:
+  null2root:
+    name: null2root
+    bio: underground hacker group
+    external-image: false
+    #picture: assets/images/profile.jpg
+    picture: assets/images/NR-Origami3-300x300-black.png
+    #twitter: johndoe
+  cheese:
+    name: cheese
+    bio: Actually, I don't really like cheese. 
+    external-image: false
+    picture: assets/images/cheese.jpg
+    #twitter: jamesfoster
+width: normal
+members: true
+projects: true
+about: true
+blog: true
+read-time: true
+show-tags: true
+related: true
+post-advance-links:
+  - blog
+show-author: true
+animation: true
+plugins:
+  - jekyll-seo-tag
+  - jekyll-gist
+  - jekyll-feed
+  - jemoji
+  - jekyll-admin
+jekyll-mentions:
+  base_url: 'https://github.com'
