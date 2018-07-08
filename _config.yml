@@ -12,6 +12,7 @@ disqus:
   shortname: mydisqus
   categories:
     - about
+    - history
     - members
     - blog
     - project
@@ -30,7 +31,7 @@ authors:
     #twitter: johndoe
   cheese:
     name: cheese
-    bio: Actually, I don't really like cheese. 
+    bio: I don't really like cheese actually. 
     external-image: false
     picture: assets/images/cheese.jpg
     #twitter: jamesfoster
@@ -38,6 +39,7 @@ width: normal
 members: true
 projects: true
 about: true
+history: true
 blog: true
 read-time: true
 show-tags: true
