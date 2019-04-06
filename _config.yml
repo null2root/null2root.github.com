@@ -6,7 +6,7 @@ picture: assets/images/NR-Origami3-300x300-black.png
 #resume: true
 #resume-external: true
 #resume-url: 'https://google.com/?q=my+resume'
-#url: 'https://koppl.in/indigo'
+url: 'https://null2root.github.io' #'https://koppl.in/indigo'
 #permalink: '/:title/'
 disqus:
   shortname: mydisqus
@@ -37,7 +37,7 @@ authors:
     #twitter: jamesfoster
 width: normal
 members: true
-projects: true
+projects: false
 about: true
 history: true
 blog: true
