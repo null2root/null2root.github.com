@@ -1,2 +1,2 @@
-bundle exec jekyll serve --host 0.0.0.0 --port 1234
+bundle exec jekyll serve --host 192.168.100.125 --port 4000
 
