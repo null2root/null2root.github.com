@@ -33,7 +33,7 @@ author: null2root
 
 # 목차
 0. [소개](#0-소개)
-	1. [역수](#01-역주)
+	1. [역주](#01-역주)
 1. [JavaScriptCore 개요](#1-javascriptcore-개요)
 	1. [값, VM 그리고 (NaN-)박싱](#11-값-vm-그리고-nan-박싱)
 	2. [객체 및 배열](#12-객체object-및-배열array)
