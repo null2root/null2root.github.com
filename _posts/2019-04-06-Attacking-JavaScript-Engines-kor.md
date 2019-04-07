@@ -14,7 +14,7 @@ author: null2root
 
 # Attacking JavaScript Engines
 
-출처 : http://www.phrack.org/papers/attacking_javascript_engines.html  
+출처 : http://www.phrack.org/papers/attacking_javascript_engines.html
 번역 및 보완 : LiLi, y0ny0ns0n, powerprove, cheese @ null2root
 
 ```
@@ -33,44 +33,45 @@ author: null2root
 
 # 목차
 0. [소개](#0-소개)
-1. [JavaScriptCore 개요](#1-java-script-core-개요)
-	1. [값, VM 그리고 (NaN-)박싱](#1-1-값-vm-그리고-na-n-박싱)
-	2. [객체 및 배열](#1-2-객체-및-배열)
-	3. [함수들](#1-3-함수)
+	1. [역수](#01-역주)
+1. [JavaScriptCore 개요](#1-javascriptcore-개요)
+	1. [값, VM 그리고 (NaN-)박싱](#11-값-vm-그리고-nan-박싱)
+	2. [객체 및 배열](#12-객체object-및-배열array)
+	3. [함수들](#13-함수)
 2. [버그](#2-버그)
-	1. [취약한 코드](#2-1-취약한-코드)
-	2. [자바스크립트 변환 규칙](#2-2-자바-스크립트-변환-규칙)
-	3. [valueOf로 공격하기](#2-3-value-of로-공격하기)
-	4. [버그에 대한 고찰](#2-4-버그에-대한-고찰)
-3. [JavaScriptCore 힙](#3-java-script-core-힙)
-	1. [쓰레기 수집기(Garbage Collector) 기본 특징](#3-1-쓰레기-수집기-garbage-collector-기본-특징)
-	2. [마킹된 공간(Marked space)](#3-2-마킹된-공간-marked-space)
-	3. [복사된 공간(Copied space)](#3-3-복사된-공간-copied-space)
+	1. [취약한 코드](#21-취약한-코드)
+	2. [자바스크립트 변환 규칙](#22-자바-스크립트-변환-규칙)
+	3. [valueOf로 공격하기](#23--valueof로-공격하기)
+	4. [버그에 대한 고찰](#24---버그에-대한-고찰)
+3. [JavaScriptCore 힙](#3-javascriptcore-힙)
+	1. [쓰레기 수집기(Garbage Collector) 기본 특징](#31-가비지-컬렉터garbage-collector-기본-특징)
+	2. [마킹된 공간(Marked space)](#32-마킹된-공간marked-space)
+	3. [복사된 공간(Copied space)](#33-복사된-공간copied-space)
 4. [익스플로잇 구축 기초단계](#4-익스플로잇-구축-기초단계)
-	1. [전제 조건: Int64](#4-1-전제-조건-int-64)
-	2. [addrof 와 fakeobj](#4-2-addrof-와-fakeobj)
-	3. [공격 계획](#4-3-공격-계획)
-5. [JSObject 시스템 이해](#5-js-object-시스템-이해)
-	1. [속성 저장소](#5-1-속성-저장소-property-storage)
-	2. [JSObject 내부](#5-2-js-object-내부)
-	3. [구조 정보](#5-3-구조-정보)
+	1. [전제 조건: Int64](#41-전제-조건-int64)
+	2. [addrof 와 fakeobj](#42-addrof-와-fakeobj)
+	3. [공격 계획](#43-공격-계획)
+5. [JSObject 시스템 이해](#5-jsobject-시스템-이해)
+	1. [속성 저장소](#51-속성-저장소-property-storage)
+	2. [JSObject 내부](#52--jsobject-내부)
+	3. [구조 정보](#53-structures-에-대하여)
 6. [공격](#6-공격)
-	1. [Structures ID 예측하기](#6-1-Structures-id-예측하기)
-	2. [모든 것을 종합해 가짜 Float64Array 만들기](#6-2-모든-것을-종합해-가짜-float-64-array-만들기)
-	3. [쉘코드 실행](#6-3-쉘코드-실행하기)
-	4. [쓰레기 수집기에서 살아남기](#6-4-쓰레기-수집기에서-살아남기)
-	5. [요약](#6-5-요약)
+	1. [Structures ID 예측하기](#61-structure-id-예측하기)
+	2. [모든 것을 종합해 가짜 Float64Array 만들기](#62-모든-것을-종합해-가짜-float64array-만들기)
+	3. [쉘코드 실행](#63---쉘코드-실행하기)
+	4. [쓰레기 수집기에서 살아남기](#64---가비지-컬렉터에서-살아남기)
+	5. [요약](#65-요약)
 7. [렌더러 프로세스 악용](#7-렌더러-프로세스-악용하기)
-	1. [WebKit 프로세스 및 권한 모델](#7-1-web-kit-프로세스-및-권한-모델)
-	2. [동일한 원본 정책](#7-2-동일-출처-정책)
-	3. [이메일 훔치기](#7-3-이메일-탈취)
+	1. [WebKit 프로세스 및 권한 모델](#71-webkit-프로세스-및-권한-모델)
+	2. [동일한 원본 정책](#72-동일-출처-정책)
+	3. [이메일 훔치기](#73-이메일-탈취)
 8. [참조](#8-참조)
 
 # 0. 소개
 
 이 글은 자바스크립트 엔진 익스플로잇 취약점 중 하나를 소개하는 글이다. 그 중 웹킷 내부 엔진인 JavaScriptCore를 대상으로 한다.
 
-설명하고자 하는 취약점은 2016년 초에 발견되어 ZDI-16-485[^1]로 보고된 CVE-2016-4622 이다. 이 취약점을 이용하면 공격자는 주소를 릭(leak)하고  웹킷 엔진에 가짜 자바 스크립트 객체를 삽입할 수 있다. 두 취약점을 조합하면 렌더러 프로세스에서 RCE(Remote Code Execution)가 가능하다. 이 취약점은 약 1년 전에 커밋된 2fa4973 에서 발생하였고 650552a 에서 패치되었다. 이 글에서는 패치되기 바로 전 버전인 커밋 320b1fc 의 코드를 사용한다. 모든 익스플로잇은 Safari 9.1.1 에서 테스트 되었다. 
+설명하고자 하는 취약점은 2016년 초에 발견되어 ZDI-16-485[^1]로 보고된 CVE-2016-4622 이다. 이 취약점을 이용하면 공격자는 주소를 릭(leak)하고  웹킷 엔진에 가짜 자바 스크립트 객체를 삽입할 수 있다. 두 취약점을 조합하면 렌더러 프로세스에서 RCE(Remote Code Execution)가 가능하다. 이 취약점은 약 1년 전에 커밋된 2fa4973 에서 발생하였고 650552a 에서 패치되었다. 이 글에서는 패치되기 바로 전 버전인 커밋 320b1fc 의 코드를 사용한다. 모든 익스플로잇은 Safari 9.1.1 에서 테스트 되었다.
 
 익스플로잇을 설명하는 과정에서 자바스크립트 엔진 내부의 많은 부분들이 언급되므로, 익스플로잇의 이해를 위해 엔진의 구조에 관한 여러 지식이 필요하다. 우리는 JavaScriptCore 구현에 초점을 맞추지만, 여기서 사용된 개념은 일반적인 다른 엔진에도 적용된다.
 
@@ -85,7 +86,7 @@ author: null2root
 - Property - 속성
 - Element - 요소
 - Address - 주소
-- Garbage Collector - 가비지 컬렉터 
+- Garbage Collector - 가비지 컬렉터
 
 
 
@@ -125,29 +126,29 @@ END_CASE(JSOP_ADD)
 
 자바스크립트는 동적인 타입을 지원하는 언어다. 따라서 타입 정보는 변수(compile-time)가 아닌 값(runtime)과 연관된다. 자바스크립트가 내장하고 있는 타입의 종류[^4]에는 primitive 타입(number, sring, boolean, null, undefined, symbol)과 object(array, function, ... )가 있다. 또 다른 주목할 만한 점은, 자바스크립트 언어에는 다른 언어에서 존재하는 클래스의 개념이 없으므로 상속을 사용할 수 없다는 것이다. 대신 자바스크립트에서는 "프로토타입 기반 상속 prototype-based-inheritance"을 구현한다. 여기서 각 object 는 property 가 통합된 프로토타입 object 에 대한 (아마 null일) 참조를 갖는다. 자세한 내용은 자바스크립트 사양 [^5]을 참조하라.
 
-모든 주요 자바스크립트 엔진은 성능상의 이유로 8바이트 이하의 값들만 사용할 수 있다(빠른 복사, 64bit 아키텍처의 레지스터에 적합). Google의 v8과 같은 일부 엔진은 값을 표현하기 위해 태그된 포인터(tagged pointer)들을 사용한다. 여기서 LSB(Least Significant Bit)는 값이 포인터인지 또는 어떤 형태의 상수인지를 나타낸다. 반면에 JavaScriptCore(JSC)와 Firefox 의 Spidermonkey는 NaN-boxing이라는 개념을 사용한다. 자바스크립트에서는 NaN 을 표현하기 위해 여러 가지의 비트 패턴을 사용하는데, NaN-boxing은 NaN 패턴을 제외한 부분에 원하는 값을 인코딩 할 수 있다는 사실을 이용한다. 특히 IEEE 754 부동소수점에서 모든 exponent 비트가 1이더라도 fraction bit 가 0이 아닌 경우 이 값은 NaN 을 나타낸다.  
+모든 주요 자바스크립트 엔진은 성능상의 이유로 8바이트 이하의 값들만 사용할 수 있다(빠른 복사, 64bit 아키텍처의 레지스터에 적합). Google의 v8과 같은 일부 엔진은 값을 표현하기 위해 태그된 포인터(tagged pointer)들을 사용한다. 여기서 LSB(Least Significant Bit)는 값이 포인터인지 또는 어떤 형태의 상수인지를 나타낸다. 반면에 JavaScriptCore(JSC)와 Firefox 의 Spidermonkey는 NaN-boxing이라는 개념을 사용한다. 자바스크립트에서는 NaN 을 표현하기 위해 여러 가지의 비트 패턴을 사용하는데, NaN-boxing은 NaN 패턴을 제외한 부분에 원하는 값을 인코딩 할 수 있다는 사실을 이용한다. 특히 IEEE 754 부동소수점에서 모든 exponent 비트가 1이더라도 fraction bit 가 0이 아닌 경우 이 값은 NaN 을 나타낸다.
 
 자료형이 double 인 경우[^6], NaN-boxing 은 값의 표현을 위해 하위 51 비트를 사용한다. 현재의 64bit 플랫폼에서도 주소 지정을 위해 48bit만을 사용하기 때문에, 51 비트의 공간은 포인터 및 32bit 정수를 저장(*Encoding*)하기에 충분하다.
 
 JSC가 사용하는 스키마는 JSCJSValue.h에 잘 설명되어 있으므로 읽어보길 권한다. 이와 관련한 부분이 추후 중요하게 사용되므로 아래에 인용한다:
 
-> 상위 16비트는 인코딩된 JSValue 의 유형을 나타낸다: 
-> 
+> 상위 16비트는 인코딩된 JSValue 의 유형을 나타낸다:
+>
 ```
-> Pointer {  0000:PPPP:PPPP:PPPP  
->        / 0001:****:****:****  
-> Double  {         ...  
->        \ FFFE:****:****:****  
-> Integer {  FFFF:0000:IIII:IIII  
+> Pointer {  0000:PPPP:PPPP:PPPP
+>        / 0001:****:****:****
+> Double  {         ...
+>        \ FFFE:****:****:****
+> Integer {  FFFF:0000:IIII:IIII
 ```
->     
+>
 > double-precision 값을 JSValue 로 인코딩하려면 double 값에 2^48 을 더해서 64비트 형태로 표현하면 된다.
 > 이 조작 후에 인코딩된 double-precision 값은 0x0000 또는 0xFFFF 패턴으로 시작할 수 없다. 상위 16 비트가 0x0001 - 0xFFFE 의 범위를 갖는 것이다.
 > 이렇게 만들어진 JSValue 값들로 추가적인 연산을 하고자 한다면, 먼저 위 인코딩을 역으로 수행하여 JSValue 값을 double 값으로 디코딩해야 한다.
 >
 > 부호있는 32비트 정수는 16비트 태그인 0xFFFF로 표시된다.
 >
-> 0x0000 태그는 포인터 또는 바로 태그된 상수의 다른 형태를 나타낸다. 
+> 0x0000 태그는 포인터 또는 바로 태그된 상수의 다른 형태를 나타낸다.
 > boolean, null 및 undefined 값은 유효하지 않은 특정 포인터 값으로 표시된다.
 ```
 > False:     0x06
@@ -160,9 +161,9 @@ JSC가 사용하는 스키마는 JSCJSValue.h에 잘 설명되어 있으므로 �
 
 ## 1.2 객체*object* 및 배열*array*
 
- 기본적으로 자바스크립트의 객체는 (키*key*, 값*value*) 쌍으로 저장되는 속성*property*들의 모음이다. 속성은 점 연산자(foo.bar) 또는 대괄호(foo['bar'])를 통해 접근할 수 있다. 이론적으로 키*key*를 사용해서 값*value*을 검색할 때, 키는 문자열로 먼저 변환되어 사용된다. 
+ 기본적으로 자바스크립트의 객체는 (키*key*, 값*value*) 쌍으로 저장되는 속성*property*들의 모음이다. 속성은 점 연산자(foo.bar) 또는 대괄호(foo['bar'])를 통해 접근할 수 있다. 이론적으로 키*key*를 사용해서 값*value*을 검색할 때, 키는 문자열로 먼저 변환되어 사용된다.
 
- 이와는 달리 배열은 문자열이 아닌 32bit 숫자 인덱스로 내부 속성들*properties*에 접근 가능한 특이 객체*exotic object*이다. 이렇게 배열에서 숫자로 접근할 수 있는 속성들을 요소*Elements* 라고 부른다. [^7] 최근에는 이러한 개념이 모든 객체에 적용되어, 대부분의 엔진에서 모든 객체는 속성*properties*과 요소*elements* 두 가지 모두를 가지게 되었다. 속성은 문자열 혹은 심볼 키를 통해 접근할 수 있고 요소는 정수 인덱스를 통해 접근할 수 있다. 배열은 ‘length’ 속성을 가지는 객체로 취급하며, length 는 최상위 element 의 인덱스 값을 가진다. 
+ 이와는 달리 배열은 문자열이 아닌 32bit 숫자 인덱스로 내부 속성들*properties*에 접근 가능한 특이 객체*exotic object*이다. 이렇게 배열에서 숫자로 접근할 수 있는 속성들을 요소*Elements* 라고 부른다. [^7] 최근에는 이러한 개념이 모든 객체에 적용되어, 대부분의 엔진에서 모든 객체는 속성*properties*과 요소*elements* 두 가지 모두를 가지게 되었다. 속성은 문자열 혹은 심볼 키를 통해 접근할 수 있고 요소는 정수 인덱스를 통해 접근할 수 있다. 배열은 ‘length’ 속성을 가지는 객체로 취급하며, length 는 최상위 element 의 인덱스 값을 가진다.
 
 내부적으로 JSC는 동일한 메모리 영역에 속성과 요소를 모두 저장하고, 객체 자체는 해당 메모리 영역에 대한 포인터를 저장한다. 이 포인터는 영역의 한 가운데를 가리키고 있으며, 속성은 영역의 왼쪽(낮은 주소), 요소는 오른쪽에 저장된다. 또한 포인터가 가리킨 영역 바로 앞에 'length' 속성(요소 벡터의 길이를 포함하는 작은 헤더)이 있다. 이 개념은 나비의 날개처럼 왼쪽과 오른쪽으로 값이 확장되기 때문에 "Butterfly"라고 불린다. 앞으로 포인터 및 메모리 영역을 "Butterfly"로 지칭할 것이다.
 
@@ -181,7 +182,7 @@ JSC가 사용하는 스키마는 JSCJSValue.h에 잘 설명되어 있으므로 �
 ```
 
 
-당연한 말이지만, 요소들은 메모리에 일렬로 쭉 나열되지는 않는다. 
+당연한 말이지만, 요소들은 메모리에 일렬로 쭉 나열되지는 않는다.
 
 예를 들어
 
@@ -352,7 +353,7 @@ EncodedJSValue JSC_HOST_CALL arrayProtoFuncSlice(ExecState* exec)
 
 숫자 타입의 변환 규칙은 [^12]에서 확인할 수 있다. 객체를 숫자(primitive types)로 변환하는 규칙이 흥미로운데, 객체에 "valueOf"라는 호출 가능한 속성`property`이 있는 경우 이 메소드를 호출하여 결과가 원시 값(primitive value)인 경우 이 값을 그대로 사용한다.
 
-그러므로 
+그러므로
 
 ```javascript
     Math.abs({valueOf: function() { return -42; }});
@@ -624,13 +625,13 @@ JavaScript 객체는 JSC 내에 다양한 C++ 클래스들의 집합으로 구�
 
 > StructureID m_structureID;
 > 가장 주목해야 할 부분이다, 뒤에서 깊이 있게 다룰 것이다.
-> 
+>
 > IndexingType m_indexingType;
 > 앞서 이 타입에 관해 설명했다. 이것은 객체 요소들을 어떤 타입으로 저장하고 있는지를 나타낸다.
-> 
+>
 > JSType m_type;
 > 셀의 타입을 저장한다(string, symbol, function, plain object 등).
-> 
+>
 > TypeInfo::InlineTypeFlags m_flags;
 > flag값은 익스플로잇에 그리 중요하지 않다. JSTypeInfo.h 에 더 자세한 정보가 나와 있다.
 >
@@ -911,7 +912,7 @@ m_butterfly 뿐만 아니라 m_mode 또한 null 값을 쓰면 안 된다는 것�
     func();
 ```
 
-코드에서 보이는 것처럼, PoC 코드는 자바스크립트 함수 객체에서 시작하여 고정된 offset에서 객체 집합으로 이어지는 몇 개의 포인터를 읽고 릭한다. 훌륭한 코드 구조라고 볼 수는 없지만(버전이 바뀌면 offset이 변경될 수 있기 때문에) 테스트용으로는 충분하다. 
+코드에서 보이는 것처럼, PoC 코드는 자바스크립트 함수 객체에서 시작하여 고정된 offset에서 객체 집합으로 이어지는 몇 개의 포인터를 읽고 릭한다. 훌륭한 코드 구조라고 볼 수는 없지만(버전이 바뀌면 offset이 변경될 수 있기 때문에) 테스트용으로는 충분하다.
 
 그 외에 개선해야 할 사항들이 있다. 첫 번째는 몇 가지 간단한 휴리스틱을 사용하여 유효한 포인터(가장 높은 bit들은 모두 0이고 다른 알려진 메모리 영역에 "근접"함)를 탐지하게 하는 기능이다. 두 번째는 특정 메모리 패턴에 기초하여 객체를 감지하는 기능을 구현하는 것이다. 예를 들어, JSCell을 상속하는 모든 클래스(예: ExecutableBase)는 인식 가능한 헤더로 시작한다. 또한, JIT 컴파일된 코드 자체는 익숙한 함수 프롤로그로 시작될 것이다.
 
