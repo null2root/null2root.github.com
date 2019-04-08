@@ -14,7 +14,7 @@ author: null2root
 
 # Attacking JavaScript Engines
 
-출처 : http://www.phrack.org/papers/attacking_javascript_engines.html
+출처 : http://www.phrack.org/papers/attacking_javascript_engines.html  
 번역 및 보완 : LiLi, y0ny0ns0n, powerprove, cheese @ null2root
 
 ```
