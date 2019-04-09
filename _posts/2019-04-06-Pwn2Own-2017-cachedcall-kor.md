@@ -1,22 +1,19 @@
 ---
 title: "[번역] Pwn2Own 2017: UAF in JSC::CachedCall"
 layout: post
-date: 2019-04-06 15:24:00
+date: '2019-04-06 08:24:00 -0700'
 tag:
 - browser
-headerImage: false
-projects: false
-hidden: false
-category: blog
 headerImage: true
+category: blog
 author: null2root
 ---
 
-# Pwn2Own 2017: UAF in JSC::CachedCall (WebKit)
-
-
 출처 : https://phoenhex.re/2017-05-04/pwn2own17-cachedcall-uaf  
 번역 및 보완 : LiLi, y0ny0ns0n, powerprove, cheese @ null2root
+
+
+# Pwn2Own 2017: UAF in JSC::CachedCall (WebKit)
 
 
 이 문서는 Samuel Groß(saelo), Niklas Baumstark 에 의해 작성되었다. Pwn2Own 팀을 결성하기 이전부터 함께 CTF 를 참가하곤 했다. 
@@ -311,6 +308,3 @@ free된 JSStrings 중 하나에 JSCell을 할당함으로써, JSString이 저장
 망가진 free list 를 고쳐 그나마 문제없이 돌아갈 정도의 힙 상태로 복구할 수는 있었겠지만 그러기 위해서는 반복문, 함수호출/정의, 또는 다른 위험한 작업을 필요로 할 것 같았다. Pwn2Own 의 목적을 위해 우리는 지저분하더라도 reliable 한 코드를 작성하기로 결정했다. 2단계에서 우리는 SIGSEGV, SIGBUS, SIGALRM 의 시그널 핸들러가 sleep 함수를 호출하도록 했다. 이렇게 하면 sandbox escape 가 진행되는 동안, 실행 중인 어떤 쓰레드도 프로세스를 파괴할 수 없다.
 
 주석이 포함된 전체 익스플로잇 코드는  cachedcall-uaf.html 파일에서 찾을 수 있다.
-
-
-
