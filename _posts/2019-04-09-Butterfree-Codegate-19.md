@@ -16,7 +16,7 @@ author: null2root
 이 문서에서는 butterfree 문제(2019' Codegate)에 대한 풀이를 다룬다.   
 대회 당시에는 readfile() 함수를 사용해서 플래그를 얻었으나, Butterfly 공격을 다시 한번 연습하기 위해 Practice 문제로 선정하였다.
 
-또한 이 문서는 널루트 내부 프로젝트 `how to browser` 에서 작성한 [Attacking JavaScript Engine](https://wiki.null2root.org/%EB%84%90%EB%A3%A8%ED%8A%B8-%EB%82%B4%EB%B6%80-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/how-to-browser/phrack), [CVE-2016-4622 분석](https://wiki.null2root.org/%EB%84%90%EB%A3%A8%ED%8A%B8-%EB%82%B4%EB%B6%80-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/how-to-browser/cve-2016-4622)  로부터 이어지는 문서로, 앞의 두 문서를 먼저 읽기를 권한다.
+또한 이 문서는 널루트 내부 프로젝트 `how to browser` 에서 작성한 [Attacking JavaScript Engine](https://null2root.github.io/blog/2019/04/06/Attacking-JavaScript-Engines-kor.html), [CVE-2016-4622 분석](https://null2root.github.io/blog/2019/04/09/CVE-2016-4622-digging.html)으로부터 이어지는 문서로, 앞의 두 문서를 먼저 읽기를 권한다.
 
 # 분석
 
@@ -32,11 +32,6 @@ Download
 
 Download2 
 ``` 
-
-* 아래의 링크를 누르면 파일을 다운로드 받을 수 있다
-
-[Download](/uploads/how-2-browser-img/7-a-45459-c-17-c-76-c-24-ae-18-fe-4870532939.zip "Download")
-[Download2](/uploads/how-2-browser-img/90-b-70-bfa-992696-d-63140-ca-63-fcb-035-cf.zip "Download2")
 
 ## 파일
 
@@ -204,12 +199,12 @@ function makeJITCompiledFunction() {
 자바스크립트에서 형식화 배열(typed array)은 버퍼 및 뷰로 구현되어 있다.   
 버퍼는 ArrayBuffer 로 구현하며, 크기만 정할 수 있고 데이터에 대한 접근은 할 수 없다.   
 뷰를 통해 데이터를 입력하거나 수정할 수 있다. 뷰는 데이터 타입을 지정한다. 
-![Typed Arrays](/uploads/how-2-browser-img/typed-arrays.png "Typed Arrays")
+
 *출처 : https://developer.mozilla.org/ko/docs/Web/JavaScript/Typed_arrays*
 
 ### array 형의 메모리 구조
 
-공격코드의 이해를 위해 TypedArray 가 데이터를 메모리에 어떻게 저장하는지를 이해할 필요가 있다. 상세한 내용은 [프랙 문서](https://wiki.null2root.org/%EB%84%90%EB%A3%A8%ED%8A%B8-%EB%82%B4%EB%B6%80-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/how-to-browser/phrack)를 참조한다.
+공격코드의 이해를 위해 TypedArray 가 데이터를 메모리에 어떻게 저장하는지를 이해할 필요가 있다. 상세한 내용은 [프랙 문서](https://null2root.github.io/blog/2019/04/06/Attacking-JavaScript-Engines-kor.html)를 참조한다.
 
 ### addrof(), fakeobj()
 
