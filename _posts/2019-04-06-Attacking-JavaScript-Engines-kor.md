@@ -1,22 +1,18 @@
 ---
 title: "[번역] Attacking JavaScript Engine"
 layout: post
-date: 2019-04-06 15:24:00
+date: '2019-04-06 08:24:00 -0700'
 tag:
 - browser
-headerImage: false
-projects: false
-hidden: false
-category: blog
 headerImage: true
+category: blog
 author: null2root
 ---
-
-# Attacking JavaScript Engines
 
 출처 : http://www.phrack.org/papers/attacking_javascript_engines.html  
 번역 및 보완 : LiLi, y0ny0ns0n, powerprove, cheese @ null2root
 
+# Attacking JavaScript Engines
 ```
 |=-----------------------------------------------------------------------=|
 |=---------------=[       The Art of Exploitation       ]=---------------=|
