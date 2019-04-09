@@ -56,3 +56,7 @@ plugins:
   - jekyll-admin
 jekyll-mentions:
   base_url: 'https://github.com'
+  
+tag_archive:
+  type: liquid
+  path: /tags/
