@@ -35,6 +35,12 @@ authors:
     external-image: false
     picture: assets/images/cheese.jpg
     #twitter: jamesfoster
+  kerz:
+    name: kerz
+    bio: Cyber security engineer at this life.
+    external-image: false
+    picture: assets/images/kerz.jpg
+    #twitter: jamesfoster
 width: normal
 members: true
 projects: false
