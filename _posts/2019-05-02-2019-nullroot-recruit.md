@@ -1,6 +1,6 @@
 ---
 layout: "post"
-title: "2019 Null@Root 신입 그룹원 모집"
+title: "[마감] 2019 Null@Root 신입 그룹원 모집"
 date: "2019-05-02 10:22"
 image: "/assets/images/2019.n2r.recruit.jpg"
 tag:
@@ -8,6 +8,12 @@ tag:
 category: blog
 headerImage: true
 author: null2root
+---
+
+
+> **2019년도 그룹원 신청이 마감되었습니다.**  
+> 지원해 주신 분들께 감사드립니다. 
+  
 ---
 
 안녕하세요. Null@Root 입니다.
