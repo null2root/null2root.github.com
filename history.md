@@ -3,6 +3,34 @@ title: History
 layout: page
 ---
 
+
+# 2018
+
+- Codegate Quals (1월)
+   - null2root
+
+- 위키 오픈 (2월)
+
+- 브라우저 익스플로잇 내부 스터디 진행 (1월-3월)
+
+- PlaidCTF Quals(2019)
+   - null2root
+
+- 단체티 제작 (5월)
+
+- Defcon Quals (5월)
+   - null2root
+
+- 내부 기술 세미나 (5월)
+   - y0ny0ns0n, LiLi, powerprove, unlimit, cheese
+
+- GoogleCTF Quals (6월)
+   - null2root
+
+- 내부 기술 세미나 (7월)
+   - loossy, md5
+
+
 # 2018
 
 - iCTF Quals (3월)
@@ -45,8 +73,8 @@ layout: page
 
 - 제 14회 해킹방어대회 (11월)
    - null2root / 3위 한국인터넷진흥원장상 ( saintlinu, grace, unlimit, cheese )
-   - gido / 9위 ( md5, loossy, hyoub9un, EG )
-   - 제 5회 화이트햇 콘테스트
+   - gido / 9위 ( md5, loossy, , EG )
+   - 제 5회 화이트햇 콘테스트hyoub9un
    - null2root / 10위  ( saintlinu, grace, unlimit, cheese )
 
 - 사이버공격방어대회 2017
