@@ -4,7 +4,7 @@ layout: page
 ---
 
 
-# 2018
+# 2019
 
 - Codegate Quals (1월)
    - null2root
