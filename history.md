@@ -76,8 +76,8 @@ layout: page
 
 - 제 14회 해킹방어대회 (11월)
    - null2root / 3위 한국인터넷진흥원장상 ( saintlinu, grace, unlimit, cheese )
-   - gido / 9위 ( md5, loossy, , EG )
-   - 제 5회 화이트햇 콘테스트hyoub9un
+   - gido / 9위 ( md5, loossy, hyoub9un, EG )
+- 제 5회 화이트햇 콘테스트
    - null2root / 10위  ( saintlinu, grace, unlimit, cheese )
 
 - 사이버공격방어대회 2017
