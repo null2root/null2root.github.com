@@ -30,6 +30,9 @@ layout: page
 - 내부 기술 세미나 (7월)
    - loossy, md5
 
+- 내부 기술 세미나 (8월)
+   - cheese, powerprove
+
 
 # 2018
 
