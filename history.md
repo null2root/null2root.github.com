@@ -33,6 +33,21 @@ layout: page
 - 내부 기술 세미나 (8월)
    - cheese, powerprove
 
+- 내부 기술 세미나 (9월)
+   - saintlinu, LiLi
+
+- 해외 세미나 발표 (11월)
+   - y0ny0ns0n, [ZeroNights 2019](https://zeronights.ru/report-en/cisco-to-disco/)
+
+- CVE 발급 (11월)
+   - powerprove, [CVE-2019-13157](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-13157)
+
+- 내부 기술 세미나 (11월)
+   - hyunmini, y0ny0ns0n
+
+
+   
+
 
 # 2018
 
