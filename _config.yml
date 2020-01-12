@@ -41,6 +41,12 @@ authors:
     external-image: false
     picture: assets/images/kerz.png
     #twitter: jamesfoster
+  y0ny0ns0n:
+    name: y0ny0ns0n
+    bio: memory corruption bug in brain
+    external-image: false
+    picture: assets/images/y0ny0ns0n.png
+    twitter: y0ny0ns0n
 width: normal
 members: true
 projects: false
