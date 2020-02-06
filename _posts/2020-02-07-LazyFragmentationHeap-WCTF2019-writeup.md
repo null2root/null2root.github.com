@@ -91,7 +91,7 @@ int main(void) {
 ```
 ![LFH enable/disable](/assets/images/lazyfragmentationheap-pic3.png)
 
-( 사족이지만, Windows 에서 할당된 모든 Heap 메모리는 [_HEAP](https://www.vergiliusproject.com/kernels/x64/Windows%2010%20%7C%202016/1903%2019H1%20(May%202019%20Update)/_HEAP) 객체를 통해 관리되는데, [HeapCreate()](https://docs.microsoft.com/en-us/windows/win32/api/heapapi/nf-heapapi-heapcreate) 함수로 생성한 private heap을 사용하지 않고 위의 테스트 코드처럼 표준 **malloc()** 함수를 사용해 할당하면 [PEB](https://ko.wikipedia.org/wiki/%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4_%ED%99%98%EA%B2%BD_%EB%B8%94%EB%A1%9D)에 보관되어 있는 기본 Heap 메모리를 사용합니다 )
+( 사족이지만, Windows 에서 할당된 모든 Heap 메모리는 [_HEAP](https://www.vergiliusproject.com/kernels/x64/Windows%2010%20%7C%202016/1903%2019H1%20(May%202019%20Update)/_HEAP)객체를 통해 관리되는데, [HeapCreate()](https://docs.microsoft.com/en-us/windows/win32/api/heapapi/nf-heapapi-heapcreate) 함수로 생성한 private heap을 사용하지 않고 위의 테스트 코드처럼 표준 **malloc()** 함수를 사용해 할당하면 [PEB](https://ko.wikipedia.org/wiki/%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4_%ED%99%98%EA%B2%BD_%EB%B8%94%EB%A1%9D)에 보관되어 있는 기본 Heap 메모리를 사용합니다 )
 
 ![_PEB->ProcessHeap](/assets/images/lazyfragmentationheap-pic4.png)
 
@@ -111,7 +111,7 @@ LFH를 이해하기 위해선 위와 같이 다양한 객체들이 어떤 기능
 - **Bucket** : LFH에게 할당받은 Heap chunk들을 크기로 분류해 묶어놓은 것이며, **UserBlock**이라고도 부름.
 - **SubSegment** : LFH가 Heap 메모리를 효율적으로 관리하기 위해 사용하는 **_HEAP_SUBSEGMENT** 구조체를 의미하며, Heap chunk 크기가 다르면 서로 다른 SubSegment가 사용됨.
 
-## 3.1. [_HEAP](https://www.vergiliusproject.com/kernels/x64/Windows%2010%20%7C%202016/1909%2019H2%20(November%202019%20Update)/_HEAP)
+## 3.1. _HEAP
 : 할당된 Heap 메모리 영역을 관리하기 위해 사용되는 가장 핵심적인 구조체.
 - EncodeFlagMask : Heap chunk header가 인코딩되었는지 판단하기 위해 사용되는 값, Heap 초기화 시 0x100000으로 설정됨
 - Encoding : Heap header들이 변조 되는것을 방지하기 위한 XOR 인코딩을 위해 사용됨
