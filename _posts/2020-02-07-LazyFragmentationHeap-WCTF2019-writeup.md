@@ -15,17 +15,17 @@ author: y0ny0ns0n
 1. [소개](#1-소개)
 2. [환경 구축](#2-환경-구축)
 3. [분석](#3-분석)<br>
-    3.1. [_HEAP](#31-_HEAP)<br>
-    3.2. [_HEAP_ENTRY](#32-_HEAP_ENTRY)<br>
-    3.3. [_HEAP_LIST_LOOKUP](#33-_HEAP_LIST_LOOKUP)<br>
-    3.4. [_LFH_HEAP](#34-_LFH_HEAP)<br>
-    3.5. [_HEAP_BUCKET](#35-_HEAP_BUCKET)<br>
-    3.6. [_HEAP_LOCAL_SEGMENT_INFO](#36-_HEAP_LOCAL_SEGMENT_INFO)<br>
-    3.7. [_HEAP_SUBSEGMENT](#37-_HEAP_SUBSEGMENT)<br>
-    3.8. [_HEAP_USERDATA_HEADER](#38-_HEAP_USERDATA_HEADER)<br>
-    3.9. [_INTERLOCK_SEQ](#39-_INTERLOCK_SEQ)<br>
-    3.10. [Allocate/Free Non-LFH chunk](#310-Allocate/Free-Non-LFH-chunk)<br>
-    3.11. [Allocate/Free LFH chunk](#311-Allocate/Free-LFH-chunk)<br>
+    3.1. [_HEAP](#31-_heap)<br>
+    3.2. [_HEAP_ENTRY](#32-_heap_entry)<br>
+    3.3. [_HEAP_LIST_LOOKUP](#33-_heap_list_lookup)<br>
+    3.4. [_LFH_HEAP](#34-_lfh_heap)<br>
+    3.5. [_HEAP_BUCKET](#35-_heap_bucket)<br>
+    3.6. [_HEAP_LOCAL_SEGMENT_INFO](#36-_heap_local_segment_info)<br>
+    3.7. [_HEAP_SUBSEGMENT](#37-_heap_subsegment)<br>
+    3.8. [_HEAP_USERDATA_HEADER](#38-_heap_userdata_header)<br>
+    3.9. [_INTERLOCK_SEQ](#39-_interlock_seq)<br>
+    3.10. [Allocate and Free Non-LFH chunk](#310-allocate-and-free-non-lfh-chunk)<br>
+    3.11. [Allocate and Free LFH chunk](#311-allocate-and-free-lfh-chunk)<br>
 4. [익스플로잇](#4-익스플로잇)
 5. [후기](#5-후기)
 6. [참고자료](#6-참고자료)
@@ -91,7 +91,7 @@ int main(void) {
 ```
 ![LFH enable/disable](/assets/images/lazyfragmentationheap-pic3.png)
 
-( 사족이지만, Windows 에서 할당된 모든 Heap 메모리는 [_HEAP](https://www.vergiliusproject.com/kernels/x64/Windows%2010%20%7C%202016/1903%2019H1%20(May%202019%20Update)/_HEAP)객체를 통해 관리되는데, [HeapCreate()](https://docs.microsoft.com/en-us/windows/win32/api/heapapi/nf-heapapi-heapcreate) 함수로 생성한 private heap을 사용하지 않고 위의 테스트 코드처럼 표준 **malloc()** 함수를 사용해 할당하면 [PEB](https://ko.wikipedia.org/wiki/%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4_%ED%99%98%EA%B2%BD_%EB%B8%94%EB%A1%9D)에 보관되어 있는 기본 Heap 메모리를 사용합니다 )
+( 사족이지만, Windows 에서 할당된 모든 Heap 메모리는 _HEAP 구조체를 통해 관리되는데, [HeapCreate()](https://docs.microsoft.com/en-us/windows/win32/api/heapapi/nf-heapapi-heapcreate) 함수로 생성한 private heap을 사용하지 않고 위의 테스트 코드처럼 표준 **malloc()** 함수를 사용해 할당하면 [PEB](https://ko.wikipedia.org/wiki/%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4_%ED%99%98%EA%B2%BD_%EB%B8%94%EB%A1%9D)에 보관되어 있는 기본 Heap 메모리를 사용합니다 )
 
 ![_PEB->ProcessHeap](/assets/images/lazyfragmentationheap-pic4.png)
 
@@ -111,7 +111,7 @@ LFH를 이해하기 위해선 위와 같이 다양한 객체들이 어떤 기능
 - **Bucket** : LFH에게 할당받은 Heap chunk들을 크기로 분류해 묶어놓은 것이며, **UserBlock**이라고도 부름.
 - **SubSegment** : LFH가 Heap 메모리를 효율적으로 관리하기 위해 사용하는 **_HEAP_SUBSEGMENT** 구조체를 의미하며, Heap chunk 크기가 다르면 서로 다른 SubSegment가 사용됨.
 
-## 3.1. _HEAP
+## 3.1. [_HEAP](https://www.vergiliusproject.com/kernels/x64/Windows%2010%20%7C%202016/1903%2019H1%20(May%202019%20Update)/_HEAP)
 : 할당된 Heap 메모리 영역을 관리하기 위해 사용되는 가장 핵심적인 구조체.
 - EncodeFlagMask : Heap chunk header가 인코딩되었는지 판단하기 위해 사용되는 값, Heap 초기화 시 0x100000으로 설정됨
 - Encoding : Heap header들이 변조 되는것을 방지하기 위한 XOR 인코딩을 위해 사용됨
@@ -218,7 +218,7 @@ LFH와 관련된 구조체들 중에서 중요한 멤버들에 대해서만 간�
 
 Windows Heap을 처음 공부하는 입장에선 각각의 구조체들이 실제로 어떤 방식으로 사용되는지 좀 헷갈릴 수 있기 때문에, LFH가 관리하지 않는 일반 Heap chunk와 구분해 Heap 메모리 할당 그리고 할당해제 과정이 어떤식으로 동작하는지 아래와 같이 간략하게 정리했습니다.
 
-## 3.10. Allocate/Free Non-LFH chunk
+## 3.10. Allocate and Free Non-LFH chunk
 ### Allocate
 Non-LFH chunk의 경우, 할당요청을 받은 Heap chunk의 크기에 따라 메모리 관리에 약간의 차이가 존재합니다.
 
@@ -241,7 +241,7 @@ Non-LFH chunk의 경우, 할당요청을 받은 Heap chunk의 크기에 따라 �
 #### size > ( _HEAP->VirtualMemoryThreshold * 0x10 )
 1. Heap header의 무결성을 검사한 후, **_HEAP->VirtualAllocdBlocks**에서 해당 Heap chunk 주소를 제거한 뒤 **ntdll!RtlpSecMemFreeVirtualMemory** 함수로 할당해제한다.
 
-## 3.11. Allocate/Free LFH chunk
+## 3.11. Allocate and Free LFH chunk
 ### Allocate
 1. **_LFH_HEAP->Buckets**를 탐색하며 할당하고자 하는 크기에 맞는 Buckets의 **SizeIndex**를 구해 **_LFH_HEAP->SegmentInfoArrays** 배열의 index로 시용해 알맞는 SubSegment를 구한다.
 2. **_HEAP_LOCAL_SEGMENT_INFO->ActiveSubsegment**가 가리키는 SubSegment의 **Depth**를 읽어들여 할당가능한 Heap chunk가 있는지 확인하고, 만약 없다면 **_HEAP_LOCAL_SEGMENT_INFO->CachedItems**에서 새로운 SubSegment를 가져온다.
@@ -883,7 +883,7 @@ pause()
 
 이제 이 취약점을 어떻게 사용할 수 있을지 고민해봐야 합니다.
 
-지금까지 찾아낸 OOB 취약점을 이용해서는 Heap chunk만 조작할 수 있기 때문에, [3.10. Allocate/Free Non-LFH chunk](#310-Allocate/Free-Non-LFH-chunk)에서 설명한 것처럼 Non-LFH chunk의 경우 할당해제시 인접한 Heap chunk를 탐색하며 병합( coalesce )처리한다는 원리를 이용해볼 수 있습니다.
+지금까지 찾아낸 OOB 취약점을 이용해서는 Heap chunk만 조작할 수 있기 때문에, [3.10. Allocate and Free Non-LFH chunk](#310-allocate-and-free-non-lfh-chunk)에서 설명한 것처럼 Non-LFH chunk의 경우 할당해제시 인접한 Heap chunk를 탐색하며 병합( coalesce )처리한다는 원리를 이용해볼 수 있습니다.
 
 그렇기 때문에 OOB write로 조작한 size의 범위안에 다른 Heap chunk가 있다면 그 chunk도 같이 할당해제되서 UAF가 발생해 아래처럼 Heap 주소를 leak할 수 있습니다.
 
@@ -1471,7 +1471,7 @@ log.info("ucrtbase = 0x%016x" % ucrtbase)
 
 필요한 모듈주소를 모두 leak 했으니 이제 마지막 익스플로잇 단계만 남았습니다.
 
-공격기법은 [3.10. Allocate/Free Non-LFH chunk](#310-Allocate/Free-Non-LFH-chunk)에서 언급한대로 Unsafe Unlink 기법을 이용해 R/W primitive를 만들어서 ROP를 해야하는데, 이후의 부분은 LFH보단 일반적인 Heap Feng-Shui에 가깝기 때문에 설명은 코드에 달린 주석으로 생략할려고 합니다.
+공격기법은 [3.10. Allocate and Free Non-LFH chunk](#310-allocate-and-free-non-lfh-chunk)에서 언급한대로 Unsafe Unlink 기법을 이용해 R/W primitive를 만들어서 ROP를 해야하는데, 이후의 부분은 LFH보단 일반적인 Heap Feng-Shui에 가깝기 때문에 설명은 코드에 달린 주석으로 생략할려고 합니다.
 
 근데 이거저거 재밌는게 많아서 이부분은 직접 한번 해보시는걸 추천해드립니다!
 
