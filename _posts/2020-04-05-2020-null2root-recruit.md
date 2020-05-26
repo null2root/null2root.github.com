@@ -1,6 +1,6 @@
 ---
 layout: "post"
-title: "2020 Null@Root 신입 그룹원 모집"
+title: "[마감] 2020 Null@Root 신입 그룹원 모집"
 date: "2020-04-05 10:22"
 image: "/assets/images/2020.n2r.recruit.png"
 tag:
@@ -10,6 +10,10 @@ headerImage: true
 author: null2root
 ---
 
+> **2020년도 그룹원 신청이 마감되었습니다.**  
+> 지원해 주신 분들께 감사드립니다.
+
+---
 
 안녕하세요. Null@Root 입니다.
 2020년 신입 그룹원을 모집합니다.
