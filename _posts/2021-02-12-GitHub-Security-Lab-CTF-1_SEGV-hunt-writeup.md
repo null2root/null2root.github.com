@@ -1,7 +1,7 @@
 ---
 layout: "post"
 title: "[Writeup] GitHub Security Lab CTF 1: SEGV hunt"
-date: "2020-02-12 19:00"
+date: "2021-02-12 19:00"
 tag:
 - CodeQL
 headerImage: true
@@ -143,7 +143,8 @@ glibc는 `alloca` 매크로를 호출하기 전 `__libc_use_alloca` 함수로 �
 
 ## 3.4.1. Question 4.1
 -  Question 4.1: Write a taint tracking query. The source should be a call to `fopen` and the sink should be the size argument of an unsafe call to `alloca`. To help you get started, here is the boilerplate for the query:
-```
+
+```text
 /**
   * @name 41_fopen_to_alloca_taint
   * @description Track taint from fopen to alloca.
@@ -199,7 +200,7 @@ select sink, source, sink, "fopen flows to alloca"
 
 query문이 상당히 길어 스크린샷 대신 code snippet을 첨부하겠습니다.
 
-```
+```text
 /**
   * @name 41_fopen_to_alloca_taint
   * @description Track taint from fopen to alloca.
