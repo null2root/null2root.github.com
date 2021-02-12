@@ -196,7 +196,7 @@ where cfg.hasFlowPath(source, sink)
 select sink, source, sink, "fopen flows to alloca"
 ```
 
-우선 위의 query문을 보면, 이미 존재하는 [GetDelimFunction Class](https://github.com/github/codeql/blob/7502c6f/cpp/ql/src/semmle/code/cpp/models/implementations/GetDelim.qll#L9)와 [StrlenFunction Class](https://github.com/github/codeql/blob/f534f09/cpp/ql/src/semmle/code/cpp/models/implementations/Pure.qll#L82)를 재정의하는데, 아마 [Global Taint Tracking](https://codeql.github.com/docs/codeql-language-guides/analyzing-data-flow-in-cpp/#using-global-taint-tracking)으로 __`fopen` 호출__ -> __`alloca` 의 크기 인자__ 로 이어지는 data flow를 추적하는 과정에서 해당 함수들( `__getdelim`, `__strnlen` )의 data flow를 따로 정의해줄 필요가 있어서 그런것 같습니다. 
+우선 위의 query문을 보면, 이미 존재하는 [GetDelimFunction Class](https://github.com/github/codeql/blob/7502c6f/cpp/ql/src/semmle/code/cpp/models/implementations/GetDelim.qll#L9)와 [StrlenFunction Class](https://github.com/github/codeql/blob/f534f09/cpp/ql/src/semmle/code/cpp/models/implementations/Pure.qll#L82)를 재정의하는데, 아마 [Global Taint Tracking](https://codeql.github.com/docs/codeql-language-guides/analyzing-data-flow-in-cpp/#using-global-taint-tracking)으로 __`fopen` 호출__ -> __`alloca` 의 크기 인자__ 로 이어지는 data flow를 추적하는 과정에서 해당 함수들( [__getdelim](https://github.com/bminor/glibc/blob/333221862ecbebde60dd16e7ca17d26444e62f50/iconv/gconv_conf.c#L387), [__strnlen](https://github.com/bminor/glibc/blob/333221862ecbebde60dd16e7ca17d26444e62f50/include/string.h#L75) )의 data flow를 따로 정의해줄 필요가 있어서 그런것 같습니다. 
 
 query문이 상당히 길어 스크린샷 대신 code snippet을 첨부하겠습니다.
 
