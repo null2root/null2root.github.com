@@ -3,6 +3,38 @@ title: History
 layout: page
 ---
 
+# 2021
+
+- 내부 기술 세미나 (1월)
+   - cheese, hyunmini, loossy
+
+- Defcon Quals (5월)
+   - null2root 
+
+- 내부 기술 세미나 (5월)
+   - kerz, loossy, unlimit 
+
+# 2020
+
+- 단체티 제작 (3월)
+
+- pctf 2020 (4월)
+   - null2root 
+
+- Defcon Quals (5월)
+   - null2root 
+
+- Google ctf 2020 (8월)
+   - null2root  
+
+- CCE 2020 Final (10월)
+   - null2root / 10위  
+
+- Flare-on 7 (10월)
+   - loossy / Finisher 
+
+- K-CSC 2020 Final (11월)
+   - null2root / AI기반 악성코드 탐지 본선 2위 
 
 # 2019
 
@@ -44,10 +76,6 @@ layout: page
 
 - 내부 기술 세미나 (11월)
    - hyunmini, y0ny0ns0n
-
-
-   
-
 
 # 2018
 
