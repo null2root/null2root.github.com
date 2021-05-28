@@ -28,13 +28,13 @@ layout: page
    - null2root  
 
 - CCE 2020 Final (10월)
-   - null2root / 10위  
+   - null2root / 10위 (md5, loossy, chease, powerprove)  
 
 - Flare-on 7 (10월)
    - loossy / Finisher 
 
 - K-CSC 2020 Final (11월)
-   - null2root / AI기반 악성코드 탐지 본선 2위 
+   - null2root / AI기반 악성코드 탐지 본선 2위 (md5, hyunmini, eloi, loossy, unlimit) 
 
 # 2019
 
