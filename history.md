@@ -28,7 +28,7 @@ layout: page
    - null2root  
 
 - CCE 2020 Final (10월)
-   - null2root / 10위 (md5, loossy, chease, powerprove)  
+   - null2root / 10위 (md5, loossy, cheese, powerprove)  
 
 - Flare-on 7 (10월)
    - loossy / Finisher 
