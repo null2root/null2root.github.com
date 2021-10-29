@@ -1,6 +1,6 @@
 ---
 layout: "post"
-title: "2021 Null@Root 신입 그룹원 모집"
+title: "[마감] 2021 Null@Root 신입 그룹원 모집"
 date: "2021-05-15 14:32"
 image: "/assets/images/2021.n2r.recruit.png"
 tag:
