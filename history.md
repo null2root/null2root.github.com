@@ -14,6 +14,14 @@ layout: page
 - 내부 기술 세미나 (5월)
    - kerz, loossy, unlimit 
 
+- flare-on 8 (10월)
+   - loossy / finisher
+
+- 2021 해킹방어대회(HDCON) (12월)
+   - null2root / 결선 1위(md5, hyunmini, kerz, Einstrasse)
+
+- anti-virus smash 내부 스터디 진행 (12월)
+
 # 2020
 
 - 단체티 제작 (3월)
@@ -30,8 +38,8 @@ layout: page
 - CCE 2020 Final (10월)
    - null2root / 10위 (md5, loossy, cheese, powerprove)  
 
-- Flare-on 7 (10월)
-   - loossy / Finisher 
+- flare-on 7 (10월)
+   - loossy / finisher 
 
 - K-CSC 2020 Final (11월)
    - null2root / AI기반 악성코드 탐지 본선 2위 (md5, hyunmini, eloi, loossy, unlimit) 
