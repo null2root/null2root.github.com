@@ -56,6 +56,7 @@ blog: true
 read-time: true
 show-tags: true
 related: true
+futrue: true
 post-advance-links:
   - blog
 show-author: true
