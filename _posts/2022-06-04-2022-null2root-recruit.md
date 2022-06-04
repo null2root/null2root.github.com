@@ -8,6 +8,7 @@ tag:
 category: blog
 headerImage: true
 author: null2root
+
 ---
 안녕하세요. Null@Root 입니다. 2022년 신입 그룹원을 모집합니다.
 
