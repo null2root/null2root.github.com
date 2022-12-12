@@ -3,15 +3,39 @@ title: History
 layout: page
 ---
 
+# 2022
+
+- codegate 2022
+   - null2root
+
+- Hayyim ctf 2022 
+   - null2root
+
+- Defcon Quals (5월)
+   - null2root
+
+- wacon 2022 (6월)
+   - null@root 
+
+- CCE 2022 
+   - null2root
+
+- whitehatcontest 2022 
+   - null2root 
+
+- flare-on 9 (10월)
+   - loossy, md5 / finisher
+
+- 사이버보안 AI,빅데이터 챌린지 2022
+   - null2root / 악성코드 탐지 대상 (hyunmini, kerz, loossy, unlimit)
+
 # 2021
 
 - 내부 기술 세미나 (1월)
    - cheese, hyunmini, loossy
 
-
 - Defcon Quals (5월)
    - null2root 
-
 
 - 내부 기술 세미나 (5월)
    - kerz, loossy, unlimit 
@@ -24,8 +48,8 @@ layout: page
 - 2021 해킹방어대회(HDCON) (12월)
    - null2root / 결선 1위(md5, hyunmini, kerz, Einstrasse)
 
-
 - anti-virus smash 내부 스터디 진행 (12월)
+
 
 # 2020
 
