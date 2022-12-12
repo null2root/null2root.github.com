@@ -26,7 +26,9 @@ layout: page
 - flare-on 9 (10월)
    - loossy, md5 / finisher
 
-- 사이버보안 AI,빅데이터 챌린지 2022
+- 정기 산행 (11월)
+
+- 사이버보안 AI,빅데이터 챌린지 2022 (12월)
    - null2root / 악성코드 탐지 대상 (hyunmini, kerz, loossy, unlimit)
 
 # 2021
