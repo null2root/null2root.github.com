@@ -16,7 +16,7 @@ layout: page
    - 영업1팀 (alvin, won0, Raang, dyrandy)
  
 - codegate 2023 (6월)
-   - null2root
+   - null@root
 
 # 2022
 
