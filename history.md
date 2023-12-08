@@ -18,6 +18,15 @@ layout: page
 - codegate 2023 (6월)
    - null@root
 
+- flare-on 10 (11월)
+   - loossy / finisher
+
+- 사이버보안 AI/빅데이터챌린지 2023 (12월)
+   - hyoub9un / AI 기반 엔드포인트 제로데이 공격 탐지 최우수상    
+
+- 정기 산행 (12월)
+
+
 # 2022
 
 - codegate 2022
