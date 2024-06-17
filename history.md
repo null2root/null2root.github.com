@@ -3,6 +3,18 @@ title: History
 layout: page
 ---
 
+# 2024
+
+- 내부 기술 세미나 (2월)
+   - dyrandy, won0
+
+- 내부 기술 세미나 (4월)
+   - donghyunlee00, JKNS
+
+- Defcon Quals (5월)
+   - nonamed(연합팀) 
+
+
 # 2023 
 
 - m0lecon 2023
@@ -17,6 +29,9 @@ layout: page
  
 - codegate 2023 (6월)
    - null@root
+ 
+- 내부 기술 세미나 (8월)
+  - Raang, alvin, Einstrasse    
 
 - flare-on 10 (11월)
    - loossy / finisher
