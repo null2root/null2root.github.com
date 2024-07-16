@@ -2,7 +2,7 @@
 
 published: true
 layout: "post"
-title: "2024 Null@Root 신입 그룹원 모집"
+title: "[마감] 2024 Null@Root 신입 그룹원 모집"
 date: "2024-06-17 03:00"
 image: "/assets/images/2024.n2r.recruit.png"
 tag:
