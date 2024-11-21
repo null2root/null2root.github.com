@@ -14,6 +14,14 @@ layout: page
 - Defcon Quals (5월)
    - nonamed(연합팀) 
 
+- 내부 기술 세미나 및 엠티 (9월)
+  - powerprove, y0ny0ns0n   
+
+- flare-on 10 (11월)
+   - loossy / finisher
+
+-  2024 FIESTA 금융보안위협분석대회 (11월)
+   - dyrandy / 사원기관 3위   
 
 # 2023 
 
