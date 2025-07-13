@@ -3,7 +3,7 @@
 published: true
 layout: "post"
 title: "2025 Null@Root 신입 그룹원 모집"
-date: "2025-07-14 00:00"
+date: "2025-07-13 00:00"
 image: "/assets/images/2025.n2r.recruit.png"
 tag:
 - recruit
@@ -31,3 +31,4 @@ author: null2root
 기타 문의사항 있을 시 아래 메일로 보내주시기 바랍니다.
 
 Contact: nr2025junior@gmail.com
+
