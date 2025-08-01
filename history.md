@@ -2,6 +2,12 @@
 title: History
 layout: page
 ---
+# 2025
+
+- 내부 기술 세미나 (7월)
+   - won0, Einstrasse
+- Defcon Quals (4월)
+   - Cold Fusion(연합팀)
 
 # 2024
 
