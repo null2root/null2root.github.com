@@ -5,8 +5,10 @@ layout: page
 # 2025
 - Defcon CTF Quals (4월)
    - Cold Fusion(연합팀)
+
 - 내부 기술 세미나 (7월)
    - won0, Einstrasse
+
 - [CTF] CCE 2025 qual (8월)
    - null@root (Einstrasse, loossy, unlimit, won0)
 
