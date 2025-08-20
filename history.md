@@ -3,11 +3,12 @@ title: History
 layout: page
 ---
 # 2025
-
+- Defcon CTF Quals (4월)
+   - Cold Fusion(연합팀)
 - 내부 기술 세미나 (7월)
    - won0, Einstrasse
-- Defcon Quals (4월)
-   - Cold Fusion(연합팀)
+- [CTF] CCE 2025 qual (8월)
+   - null@root (Einstrasse, loossy, unlimit, won0)
 
 # 2024
 
@@ -17,7 +18,7 @@ layout: page
 - 내부 기술 세미나 (4월)
    - donghyunlee00, JKNS
 
-- Defcon Quals (5월)
+- Defcon CTF Quals (5월)
    - nonamed(연합팀) 
 
 - 내부 기술 세미나 및 엠티 (9월)
@@ -34,7 +35,7 @@ layout: page
 - m0lecon 2023
    - Untitled(연합팀)
 
-- Defcon Quals (5월)
+- Defcon CTF Quals (5월)
    - Untitled(연합팀)
 
 - CCE 2023 (6월)
@@ -67,7 +68,7 @@ layout: page
 - Hayyim ctf 2022 
    - null2root
 
-- Defcon Quals (5월)
+- Defcon CTF Quals (5월)
    - null2root
 
 - wacon 2022 (6월)
