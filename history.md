@@ -2,6 +2,13 @@
 title: History
 layout: page
 ---
+# 2026
+- 내부 기술 세미나 (2월)
+   - dyrandy, 0s_W
+
+- Defcon CTF Quals (5월)
+   - Cold Fusion(연합팀)
+
 # 2025
 - Defcon CTF Quals (4월)
    - Cold Fusion(연합팀)
@@ -9,7 +16,16 @@ layout: page
 - 내부 기술 세미나 (7월)
    - won0, Einstrasse
 
-- [CTF] CCE 2025 qual (8월)
+- Defcon CTF Final (8월)
+   - Cold Fusion(연합팀)
+
+- CCE 2025 Quals (8월)
+   - null@root (Einstrasse, loossy, unlimit, won0)
+
+- 내부 기술 세미나 (9월)
+   - alvin, unlimit
+ 
+- CCE 2025 Final (9월)
    - null@root (Einstrasse, loossy, unlimit, won0)
 
 # 2024
