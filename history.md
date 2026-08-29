@@ -9,6 +9,12 @@ layout: page
 - Defcon CTF Quals (5월)
    - Cold Fusion(연합팀)
 
+- 내부 기술 세미나 (6월)
+   - MIsutgaRU
+
+- Defcon CTF Quals (8월)
+   - Cold Fusion(연합팀) 
+
 # 2025
 - Defcon CTF Quals (4월)
    - Cold Fusion(연합팀)
